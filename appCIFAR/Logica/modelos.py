@@ -40,7 +40,7 @@ class ModeloCIFAR():
             modelo_svm = pickle.load(file)
         return modelo_svm
 
-    def cargarModelo(self, ruta_modelo_cnn, ruta_modelo_svm):
+    def cargarModelo(self, ruta_modelo_cnn, ruta_modelo_svm):   
         print(f"Intentando cargar el modelo CNN desde: {ruta_modelo_cnn}")
         modelo_cnn = self.cargarCNN(ruta_modelo_cnn)
 
