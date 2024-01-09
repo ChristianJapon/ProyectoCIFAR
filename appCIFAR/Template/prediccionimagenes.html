@@ -16,43 +16,79 @@
             background-color: #2F7BAC; 
         }
 
-        .sidebar {
+        .sidebar-left {
             width: 200px;
             height: 100%;
             position: fixed;
             top: 0;
             left: 0;
-            background-color: #333; /* Color de fondo de la barra lateral */
+            background-color: #333;
             padding-top: 20px;
             color: #fff;
         }
 
-        .sidebar h3 {
+        .sidebar-left h3 {
             text-align: center;
             margin-bottom: 10px;
         }
 
-        .sidebar ul {
+        .sidebar-left ul {
             list-style-type: none;
             padding: 0;
         }
 
-        .sidebar li {
+        .sidebar-left li {
             padding: 10px;
             text-align: center;
         }
 
-        .sidebar a {
+        .sidebar-left a {
             text-decoration: none;
             color: #fff;
         }
 
-        .sidebar a:hover {
+        .sidebar-left a:hover {
             background-color: #555;
         }
 
         .content {
-            margin-left: 440; /* Ajusta según el ancho de la barra lateral */
+            margin-left: 220px; /* Ajusta según el ancho de la barra lateral izquierda */
+            margin-right: 220px; /* Ajusta según el ancho de la barra lateral derecha */
+        }
+
+        .sidebar-right {
+            width: 200px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #333;
+            padding-top: 20px;
+            color: #fff;
+        }
+
+        .sidebar-right h3 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-right ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar-right li {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .sidebar-right a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .sidebar-right a:hover {
+            background-color: #555;
         }
 
         h1 {
@@ -110,12 +146,13 @@
     </style>
 </head>
 <body>
-    <div class="sidebar">
+    <div class="sidebar-left">
         <h3>Descargas</h3>
         <ul>
             <li><a href="https://github.com/ChristianJapon/ProyectoCIFAR/blob/9d2884143e98f15b85cb54f239d949144e2e7bb8/Recursos/FASE_PREPARACION_CIFAR100%20CNN.pdf" target="_blank">Face de preparación CNN</a></li>
             <li><a href="https://github.com/ChristianJapon/ProyectoCIFAR/blob/9d2884143e98f15b85cb54f239d949144e2e7bb8/Recursos/FASE_PREPARACION_CIFAR100%20SVM.pdf" target="_blank">Fase de preparación SVM</a></li>
             <li><a href="https://github.com/ChristianJapon/ProyectoCIFAR/blob/9d2884143e98f15b85cb54f239d949144e2e7bb8/Recursos/Fase%20de%20uso%20de%20los%20modelos%20CNN%20y%20SVM.pdf" target="_blank">Fase de uso de los modelos</a></li>
+            <li><a href="https://github.com/ChristianJapon/ProyectoCIFAR/blob/8119b67a38f140742fc679e314e5eeebb17cf053/Recursos/JaponChristian_Practica-SVM-Deep%20Learning%20y%20Despligue%20Servicios%20ML.pdf" target="_blank">Documentro Practica</a></li>
         </ul>
     </div>
 
@@ -159,5 +196,20 @@
             }
         </script>
     </div>
+
+    <div class="sidebar-right">
+        <h3>Historial de Predicciones</h3>
+        <ul>
+            {% for prediction in historial_predicciones %}
+                <li>
+                    <strong>Imagen:</strong> {{ prediction.nombre_imagen }}<br>
+                    <strong>Fecha:</strong> {{ prediction.fecha_prediccion }}<br>
+                    <strong>Resultado CNN:</strong> {{ prediction.resultado_cnn }}<br>
+                    <strong>Resultado SVM:</strong> {{ prediction.resultado_svm }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
 </body>
 </html>

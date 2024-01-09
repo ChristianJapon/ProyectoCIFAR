@@ -27,7 +27,6 @@ class Clasificacion:
             resultado = modelo_cifar.predecirImagen('temp_image.png')
             print(f"Resultado de la predicción: {resultado}")
             resultado['image'] = static('temp_image.png')  # Asegúrate de ajustar esto según la estructura de tus rutas
-
             return render(request, "prediccionimagenes.html", {"resultado": resultado})
 
             # Redirige a la plantilla informeprediccion.html
