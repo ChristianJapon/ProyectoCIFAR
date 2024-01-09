@@ -6,10 +6,53 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f8f8;
             margin: 0;
             padding: 0;
             text-align: center;
+        }
+
+        /* Fondo dinámico */
+        body {
+            background-color: #2F7BAC; 
+        }
+
+        .sidebar {
+            width: 200px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333; /* Color de fondo de la barra lateral */
+            padding-top: 20px;
+            color: #fff;
+        }
+
+        .sidebar h3 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .sidebar a:hover {
+            background-color: #555;
+        }
+
+        .content {
+            margin-left: 440; /* Ajusta según el ancho de la barra lateral */
         }
 
         h1 {
@@ -67,43 +110,54 @@
     </style>
 </head>
 <body>
-    <div class="prediction-form">
-        <h1>Predicción de Imágenes</h1>
-        <form id="imageForm" action="{% url 'predecir' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="imagen" accept="image/*" required onchange="showImage(this)">
-            <button type="submit">Predecir</button>
-        </form>
-        <div id="preview" style="display: none;">
-            <h2>Imagen cargada:</h2>
-            <img id="imagePreview" alt="Imagen cargada">
-        </div>
+    <div class="sidebar">
+        <h3>Descargas</h3>
+        <ul>
+            <li><a href="Recursos\FASE_PREPARACION_CIFAR100 CNN.html">Face de preparación CNN</a></li>
+            <li><a href="https://github.com/ChristianJapon/ProyectoCIFAR/blob/main/Recursos/FASE_PREPARACION_CIFAR100%20SVM.html">Fase de preparación SVM</a></li>
+            <li><a href="https://github.com/ChristianJapon/ProyectoCIFAR/blob/main/Recursos/Fase%20de%20uso%20de%20los%20modelos%20CNN%20y%20SVM.html">Fase de uso de los modelos</a></li>
+        </ul>
     </div>
 
-    {% if resultado %}
-        <div class="prediction-result">
-            <h2>MODELO CNN:</h2>
-            <p>Clase predicha por CNN: {{ resultado.nombre_clase_cnn }}</p>
-
-            <hr>
-
-            <h2>MODELO SVM:</h2>
-            <p>Clase predicha por SVM: {{ resultado.nombre_clase_svm }}</p>
+    <div class="content">
+        <div class="prediction-form">
+            <h1>Predicción de Imágenes</h1>
+            <form id="imageForm" action="{% url 'predecir' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="imagen" accept="image/*" required onchange="showImage(this)">
+                <button type="submit">Predecir</button>
+            </form>
+            <div id="preview" style="display: none;">
+                <h2>Imagen cargada:</h2>
+                <img id="imagePreview" alt="Imagen cargada">
+            </div>
         </div>
-    {% endif %}
 
-    <script>
-        function showImage(input) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('imagePreview').src = e.target.result;
-                    document.getElementById('preview').style.display = 'block';
-                };
-                reader.readAsDataURL(file);
+        {% if resultado %}
+            <div class="prediction-result">
+                <h2>MODELO CNN:</h2>
+                <p>Clase predicha por CNN: {{ resultado.nombre_clase_cnn }}</p>
+
+                <hr>
+
+                <h2>MODELO SVM:</h2>
+                <p>Clase predicha por SVM: {{ resultado.nombre_clase_svm }}</p>
+            </div>
+        {% endif %}
+
+        <script>
+            function showImage(input) {
+                const file = input.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById('imagePreview').src = e.target.result;
+                        document.getElementById('preview').style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
             }
-        }
-    </script>
+        </script>
+    </div>
 </body>
 </html>
